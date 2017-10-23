@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.manoel.wolfchatapp.Activity.CadastroActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <EditText
+            android:id="@+id/edtCadNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nome"
+            android:inputType="text"
+            />
+        <EditText
+            android:id="@+id/edtCadSobrenome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Sobrenome"
+            android:inputType="text"
+            />
+        <EditText
+            android:id="@+id/edtCadAniversario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="DataDeNascimento"
+            android:inputType="date"
+            />
+        <EditText
+            android:id="@+id/edtCadEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Wolf-Email"
+            android:inputType="textEmailAddress"
+            />
+        <EditText
+            android:id="@+id/edtCadSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Wolf-Senha"
+            android:inputType="textPassword"
+            />
+        <EditText
+            android:id="@+id/edtConfirmarSenha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Confirmar Wolf-Senha"
+            android:inputType="textPassword"
+            />
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:id="@+id/radioGroupSexo"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rbFeiminino"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Feiminino"
+                />
+            <RadioButton
+                android:id="@+id/rbMasculino"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Masculino"
+                />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnSalvar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SALVAR"
+            />
+
+
+    </LinearLayout>
+
+</LinearLayout>
