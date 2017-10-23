@@ -25,10 +25,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".TelaDeLogin" />
         <activity android:name=".CadastroActivity" />
-        <activity android:name=".TelaDeChat" />
-        <activity
-            android:name=".meuCuzinhoDandoBote"
-            android:label="@string/title_activity_meu_cuzinho_dando_bote"></activity>
+        <activity android:name=".TelaDeChat"></activity>
     </application>
 
 </manifest>
