@@ -4,4 +4,5 @@
     <string name="entrar_no_wolf_chat">ENTRAR NO WOLF CHAT</string>
     <string name="prompt_email">email</string>
     <string name="action_sign_in_short">senha</string>
+    <string name="title_activity_tarefa_navas">TarefaNavas</string>
 </resources>
