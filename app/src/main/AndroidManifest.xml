@@ -26,9 +26,6 @@
         <activity android:name=".TelaDeLogin" />
         <activity android:name=".CadastroActivity" />
         <activity android:name=".TelaDeChat" />
-        <activity
-            android:name=".TarefaNavas"
-            android:label="@string/title_activity_tarefa_navas"></activity>
     </application>
 
 </manifest>
