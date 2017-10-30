@@ -89,7 +89,8 @@ public class TelaDeLogin extends AppCompatActivity {
             Toast.makeText(TelaDeLogin.this,"Pocha Lobo :( ... Preenche os campos ae!!!",Toast.LENGTH_SHORT).show();
 
         }
-        else {
+        else
+            {
 
             mAuth.signInWithEmailAndPassword(usuarios.getEmail(), usuarios.getSenha())
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -99,7 +100,7 @@ public class TelaDeLogin extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 Toast.makeText(TelaDeLogin.this, "Deu certo "+usuarios.getEmail()+" " +
                                         "De senha: "+usuarios.getSenha(), Toast.LENGTH_SHORT).show();
-
+                                System.out.println("entrou");
                             }
                             else
                             {
