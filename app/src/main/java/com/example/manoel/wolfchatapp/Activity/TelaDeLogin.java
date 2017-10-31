@@ -12,9 +12,11 @@ import android.widget.Toast;
 
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import Entidades.Usuario;
 
@@ -91,8 +93,16 @@ public class TelaDeLogin extends AppCompatActivity {
         }
         else
             {
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(
+                        usuarios.getEmail(),usuarios.getSenha()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        FirebaseUser user = authResult.getUser();
+                        System.out.println("Este é o usuário: "+user);
+                    }
+                });
 
-            mAuth.signInWithEmailAndPassword(usuarios.getEmail(), usuarios.getSenha())
+            /*mAuth.signInWithEmailAndPassword(usuarios.getEmail(), usuarios.getSenha())
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -100,6 +110,7 @@ public class TelaDeLogin extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 Toast.makeText(TelaDeLogin.this, "Deu certo "+usuarios.getEmail()+" " +
                                         "De senha: "+usuarios.getSenha(), Toast.LENGTH_SHORT).show();
+
                                 System.out.println("entrou");
                             }
                             else
@@ -109,7 +120,7 @@ public class TelaDeLogin extends AppCompatActivity {
                             }
                         }
 
-                    });
+                    });*/
         }
     }
     private void abrirTelaPrincipal(){
