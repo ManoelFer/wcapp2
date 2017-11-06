@@ -72,11 +72,11 @@ public class CadastroActivity extends AppCompatActivity {
 
                     if (edtCadMasculino.isChecked())
                     {
-                        usuarios.setSexo("Masculino");
+                        usuarios.setSexo("Feminino");
                     }
                     else
                     {
-                        usuarios.setSexo("Feiminino");
+                        usuarios.setSexo("Masculino");
                     }
 
                     cadastrarUsuario();

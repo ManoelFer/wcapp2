@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,6 +31,7 @@ import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.List;
 
+import DAO.ManipularDadosUsu;
 import Entidades.Usuario;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -48,7 +51,7 @@ public class TelaDeChat extends AppCompatActivity {
     private static final int PHOTO_PERFIL = 2;
     private String fotoDePerfil;
 
-    private FirebaseDatabase database;
+    private FirebaseDatabase database2;
     private DatabaseReference databaseReference;
 
 
@@ -57,6 +60,8 @@ public class TelaDeChat extends AppCompatActivity {
 
     private List<Usuario> usuarioList = new ArrayList<Usuario>();
     private ArrayAdapter<Usuario> arrayAdapterUsuario;
+
+    private ManipularDadosUsu usu = new ManipularDadosUsu();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +76,49 @@ public class TelaDeChat extends AppCompatActivity {
         btnEnviarFoto = (ImageButton)findViewById(R.id.btnEnviarFoto);
         fotoDePerfil = "";
 
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("wolfchat");//Sala de chat (nome)
+
+//------------------------------------------------------------------------------------------------------------------------------------
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        final String emailUser = user.getEmail();// Função para recuperar o e-mail do usuário logado.
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();//Função do Firebase para acesssar o banco de dados
+        DatabaseReference ref = database.getReferenceFromUrl("https://wolfchatapp.firebaseio.com/").child("usuario");//Referência
+        //pela Url, para declarar, por qual caminho o sistema deve seguir para encontrar os dados desejados
+
+        ref.orderByChild("email").equalTo(emailUser).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot d : dataSnapshot.getChildren()) {
+
+                    Usuario u = d.getValue(Usuario.class);//Seta todos os valores na minha entidade Usuário, onde se localiza
+                    //Meus geters e seters;
+
+                    //Popula as variáveis criadas, para receber os valores, setados em minha classe.
+                    String dataNascimento = u.getDataNascimento();
+                    String emailDoUsuario = u.getEmail();
+                    String idDoUsuario = u.getId();
+                    String nomeDoUsuario = u.getNome();
+                    String senhaDoUsuario = u.getSenha();
+                    String sexoDoUsuario = u.getSexo();
+                    String sobrenomeDoUsuario = u.getSobrenome();
+                    //final do penúltimo comentário
+
+                    nome.setText(nomeDoUsuario);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+//-------------------------------------------------------------------------------------------------------------------------------------
+                database2 = FirebaseDatabase.getInstance();
+        databaseReference = database2.getReference("wolfchat");//Sala de chat (nome)
 
         firebaseStorage = FirebaseStorage.getInstance();
 
@@ -85,8 +131,10 @@ public class TelaDeChat extends AppCompatActivity {
         btnEnviarMenssagem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                databaseReference.push().setValue(new MenssagensEnviadas(txtMenssagem.getText().toString(), nome.getText().toString(),"","1"
-                        , ServerValue.TIMESTAMP));//Função de horas, ele envia para um servidor que se encarrega de voltar a hora certa
+
+
+                databaseReference.push().setValue(new MenssagensEnviadas(txtMenssagem.getText().toString(),
+                        nome.getText().toString(),"","1", ServerValue.TIMESTAMP));//Função de horas, ele envia para um servidor que se encarrega de voltar a hora certa
                 txtMenssagem.setText("");
             }
         });
@@ -168,7 +216,7 @@ public class TelaDeChat extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Uri u = taskSnapshot.getDownloadUrl();
-                    MenssagensEnviadas m = new MenssagensEnviadas("Manoel te enviou uma foto!",u.toString(),nome.getText().toString(),
+                    MenssagensEnviadas m = new MenssagensEnviadas(nome.getText()+" te enviou uma foto!",u.toString(),nome.getText().toString(),
                             fotoDePerfil,"2",ServerValue.TIMESTAMP);
                     databaseReference.push().setValue(m);
                 }
@@ -185,7 +233,7 @@ public class TelaDeChat extends AppCompatActivity {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Uri u = taskSnapshot.getDownloadUrl();
                     fotoDePerfil = u.toString();
-                    MenssagensEnviadas m = new MenssagensEnviadas("Manoel alterou sua foto de perfil!!",
+                    MenssagensEnviadas m = new MenssagensEnviadas(nome.getText()+" alterou sua foto de perfil!!",
                             u.toString(), nome.getText().toString(),fotoDePerfil, "2", ServerValue.TIMESTAMP);
                     databaseReference.push().setValue(m);
                     Glide.with(TelaDeChat.this).load(u.toString()).into(fotoPerfil);
