@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private int chaves = 0;
 
+
 // ...
 
 
@@ -127,13 +128,28 @@ public class MainActivity extends AppCompatActivity {
 
                         if (diaUsu2 == diaAtual && mesUsu2 == mesAtual) {//Se o dia atual e o mês atual, for igual ao dia do nascimento
                             //e o mês do nascimento, então, imprime uma mensagem parabernizando o usuário!
+                            if (hora > 00 && hora < 12) {
+                                if (sexoDoUsuario.equals("Feminino")) {// Se ele for do sexo feminino, ele imprime uma mensagem para mulher.
+                                    nomeUsu.setText("Bom dia " + nomeDoUsuario + ", Feliz aniversário loba!");
+                                } else {//Se não, ele imprime uma mensagem para homem.
+                                    nomeUsu.setText("Bom dia " + nomeDoUsuario + ", Feliz aniversário lobo!");
+                                }
+                            } else if (hora > 12 && hora < 18) {
+                                    if (sexoDoUsuario.equals("Feminino")) {
+                                        nomeUsu.setText("Boa tarde " + nomeDoUsuario + ", Feliz aniversário loba!");
+                                    } else {
+                                        nomeUsu.setText("Boa tarde " + nomeDoUsuario + ", Feliz aniversário lobo!");
+                                    }
+                            } else {
 
-                            if (sexoDoUsuario.equals("Feminino")) {// Se ele for do sexo feminino, ele imprime uma mensagem para mulher.
-                                nomeUsu.setText("Bom dia " + nomeDoUsuario + ", Feliz aniversário loba!");
+                                if (sexoDoUsuario.equals("Feminino")) {
+                                    nomeUsu.setText("Boa noite " + nomeDoUsuario + ", Feliz aniversário loba!");
+                                } else {
+                                    nomeUsu.setText("Boa noite " + nomeDoUsuario + ", Feliz aniversário lobo!");
+                                }
+
                             }
-                            else {//Se não, ele imprime uma mensagem para homem.
-                                nomeUsu.setText("Bom dia " + nomeDoUsuario + ", Feliz aniversário lobo!");
-                            }
+
 
                         } else //Se não for a data de aniversário do usuário, ele imprime uma mensagem normal de bom dia, boa tarde e
                         //boa noite, de acordo com o horário do sistema.

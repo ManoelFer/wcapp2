@@ -31,7 +31,6 @@ import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.List;
 
-import DAO.ManipularDadosUsu;
 import Entidades.Usuario;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -61,7 +60,6 @@ public class TelaDeChat extends AppCompatActivity {
     private List<Usuario> usuarioList = new ArrayList<Usuario>();
     private ArrayAdapter<Usuario> arrayAdapterUsuario;
 
-    private ManipularDadosUsu usu = new ManipularDadosUsu();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

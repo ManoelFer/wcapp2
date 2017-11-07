@@ -1,5 +1,7 @@
 package Entidades;
 
+import android.widget.ImageView;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.Transaction;
@@ -8,6 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import DAO.ConfiguracaoFirebase;
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 /**
  * Created by Manoel on 19/10/2017.
@@ -17,6 +21,7 @@ public class Usuario
 {
 
     private String id;
+    private CircleImageView fotoPerfil;
     private String nome;
     private String sobrenome;
     private String dataNascimento;
@@ -39,6 +44,7 @@ public class Usuario
         HashMap<String, Object> hashMapUsuario = new HashMap<>();
 
         hashMapUsuario.put("id",getId());
+        hashMapUsuario.put("fotoPerfil",getFotoPerfil());
         hashMapUsuario.put("nome",getNome());
         hashMapUsuario.put("sobrenome",getSobrenome());
         hashMapUsuario.put("dataNascimento",getDataNascimento());
@@ -55,6 +61,13 @@ public class Usuario
 
     public void setId(String id) {
         this.id = id;
+    }
+    public CircleImageView getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+    public void setFotoPerfil(CircleImageView fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
     }
 
     public String getNome() {
@@ -104,5 +117,6 @@ public class Usuario
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
 
 }

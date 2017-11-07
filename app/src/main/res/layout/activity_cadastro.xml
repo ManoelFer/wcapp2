@@ -15,6 +15,20 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/cadFotoPerfil"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Clique na imagem para adicionar uma foto!"
+            android:textAlignment="center"
+            tools:textColor="@android:color/black" />
 
         <EditText
             android:id="@+id/edtCadNome"
@@ -34,7 +48,7 @@
             android:id="@+id/edtCadAniversario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="DataDeNascimento"
+            android:hint="Data de Nascimento"
             android:inputType="date"
             />
         <EditText
