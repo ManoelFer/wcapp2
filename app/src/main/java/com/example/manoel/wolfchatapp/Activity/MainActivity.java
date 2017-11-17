@@ -2,6 +2,7 @@ package com.example.manoel.wolfchatapp.Activity;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -42,12 +43,15 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -107,9 +111,6 @@ public class MainActivity extends AppCompatActivity {
 
         fotoPerfil = (CircleImageView) findViewById(R.id.FotoPerfil);
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Aguarde enquanto a foto de perfil carrega...");
-        progressDialog.show();
 
         sair = (Button) findViewById(R.id.sair);//recupera o valor do botão deslogar, da minha tela main activity
         chat = (Button) findViewById(R.id.entrarChat);//recupera o valor do botão entrar no chat.
@@ -117,27 +118,6 @@ public class MainActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference(FB_DATABASE_PATH);
 
-        /*
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                progressDialog.dismiss();
-
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Usuario u = snapshot.getValue(Usuario.class);
-                    imgList.add(u);
-                }
-
-                adapterFotoPerfil = new AdapterFotoPerfil(MainActivity.this, R.layout.activity_main,imgList);
-
-                //fotoPerfil.setAdapter(adapterFotoPerfil);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                progressDialog.dismiss();
-            }
-        });
 
         fotoPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,11 +128,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
             }
-        });*/
+        });
 
 //------------------------------------------------------------------------------------------------------------------------------------
 
-           FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+           final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
             final String emailUser = user.getEmail();// Função para recuperar o e-mail do usuário logado.
 
@@ -170,20 +150,12 @@ public class MainActivity extends AppCompatActivity {
                         String emailDoUsuario = u.getEmail();
                         String urlFoto = u.getUrl();
 
-                       /* mStorageRef = firebaseStorage.getReferenceFromUrl("gs://wolfchatapp.appspot.com").child(FB_STORAGE_PATH + "/1510756995556.jpeg/");
-                        long ONE_MEGA_BYTE = 1024 * 1024;
-                        mStorageRef.getBytes(ONE_MEGA_BYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                            @Override
-                            public void onSuccess(byte[] bytes) {
-                                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                                fotoPerfil.setImageBitmap(bitmap);
-                            }
-                        });*/
-
+                        Picasso.with(MainActivity.this).load(urlFoto).into(fotoPerfil);
 
                     }
 
                     }
+
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
