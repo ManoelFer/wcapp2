@@ -26,6 +26,7 @@
         <activity android:name=".TelaDeLogin" />
         <activity android:name=".CadastroActivity" />
         <activity android:name=".TelaDeChat" />
+        <activity android:name=".Notificacao"></activity>
     </application>
 
 </manifest>

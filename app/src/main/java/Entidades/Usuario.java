@@ -1,16 +1,12 @@
 package Entidades;
 
-import android.widget.ImageView;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
-import com.google.firebase.database.Transaction;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import DAO.ConfiguracaoFirebase;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 
 /**
@@ -21,7 +17,7 @@ public class Usuario
 {
 
     private String id;
-    private CircleImageView fotoPerfil;
+    private String url;
     private String nome;
     private String sobrenome;
     private String dataNascimento;
@@ -44,7 +40,7 @@ public class Usuario
         HashMap<String, Object> hashMapUsuario = new HashMap<>();
 
         hashMapUsuario.put("id",getId());
-        hashMapUsuario.put("fotoPerfil",getFotoPerfil());
+        hashMapUsuario.put("fotoPerfil",getUrl());
         hashMapUsuario.put("nome",getNome());
         hashMapUsuario.put("sobrenome",getSobrenome());
         hashMapUsuario.put("dataNascimento",getDataNascimento());
@@ -55,6 +51,11 @@ public class Usuario
         return hashMapUsuario;
     }
 
+    public Usuario(String url, String email) {
+        this.url = url;
+        this.email = email;
+    }
+
     public String getId() {
         return id;
     }
@@ -62,12 +63,14 @@ public class Usuario
     public void setId(String id) {
         this.id = id;
     }
-    public CircleImageView getFotoPerfil() {
-        return fotoPerfil;
+
+    public String getUrl() {
+        return url;
     }
 
-    public void setFotoPerfil(CircleImageView fotoPerfil) {
-        this.fotoPerfil = fotoPerfil;
+    public String setUrl(String url) {
+        this.url = url;
+        return url;
     }
 
     public String getNome() {

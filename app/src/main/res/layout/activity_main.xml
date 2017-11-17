@@ -7,12 +7,35 @@
     android:orientation="vertical"
     tools:context="com.example.manoel.wolfchatapp.Activity.MainActivity">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/FotoPerfil"
+        android:layout_width="200sp"
+        android:layout_height="200sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/FotoPerfil"
+        android:layout_marginTop="33dp"
+        android:text="Clique na imagem para adicionar uma foto!"
+        android:textAlignment="center"
+        tools:textColor="@android:color/black" />
+
+
     <TextView
         android:id="@+id/nomeUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="24dp"
         android:text="nome"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         app:layout_constraintBottom_toBottomOf="parent"
